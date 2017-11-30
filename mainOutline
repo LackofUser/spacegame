@@ -1,0 +1,40 @@
+space game:
+  screens/frames:
+    mainMenu:
+      new game
+      load game
+      options:
+        graphics:
+        controls
+        gameplay
+      credits
+    pauseMenu:
+      resume
+      new game
+      load game
+      options
+      quit
+      save & quit
+    mainSpace:
+      ships
+    map:
+      starSystems:
+        #starSystems
+      playermarker
+      
+  gameMechanics:
+    player:
+      camera:
+    movement:
+    factions:
+      pirate
+      GA(galactic athority)
+    shipAI:
+    progression:
+    damage:
+    inventory:
+      shipSubsystems:
+        #subSystems
+      items:
+        currency
+        
