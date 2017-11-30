@@ -21,6 +21,7 @@ space game:
       starSystems:
         #starSystems
       playermarker
+      nebula
       
   gameMechanics:
     player:
@@ -38,3 +39,4 @@ space game:
       items:
         currency
         
+  optimization:
