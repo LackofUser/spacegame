@@ -1,2 +1,2 @@
 # spacegame
-A simple space game with C &amp; the SDL2 library
+The Documentation for the game's mechanics
