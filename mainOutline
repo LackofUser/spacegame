@@ -16,19 +16,22 @@ space game:
       quit
       save & quit
     mainSpace:
-      ships
+      derelictShips
     map:
       starSystems:
         #starSystems
       playermarker
-      nebula
-      
+      nebuli
+      anomalies
+      spaceStations
+      asteroidBelts
   gameMechanics:
     player:
       camera:
     movement:
     factions:
       pirate
+      neutral
       GA(galactic athority)
     shipAI:
     progression:
