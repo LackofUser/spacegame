@@ -20,7 +20,7 @@ int main(void)
   //Main game loop which contains, well, everything!
   while(running)
   {
-    //Then a wee little event loop for keystrokes mouse movements, and etc...
+    //Then a wee little event loop for keystrokes, mouse movements, and etc...
     while(SDL_PollEvent(&event))
     {
       //Shuts down the game when the user tries to quit
