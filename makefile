@@ -1,16 +1,18 @@
 CC=gcc
 sdl2=$(shell sdl2-config --libs --cflags)
-obs=main.c
+obs=base.o main.o
 out=spacegame
-CFLAGS=$(sdl2) -o $(out)
+CFLAGS=-lm -Iinclude $(sdl2)
 
-all: $(obs)
-	$(CC) $(CFLAGS) $(obs)
+all : $(obs)
+	$(CC) $(obs) -o $(out)  $(CFLAGS)
 
-.PHONY: clean tidy
+main.o : base.o
 
-clean:
+.PHONY : clean tidy
+
+clean :
 	-rm $(obs) $(out)
 
-tidy:
+tidy :
 	-rm $(obs)
