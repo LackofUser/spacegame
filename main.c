@@ -6,8 +6,8 @@
 
 int main(void)
 {
-  int rps = 30;
-  int pps = 100;
+  int rps = 30; //Renders per-second
+  int pps = 60; //Processes per-second
   int p = 0;
 
   init();
