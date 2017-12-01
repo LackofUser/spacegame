@@ -1,8 +1,12 @@
 # spacegame
 A simple space game with C &amp; the SDL2 library
 
+# dependancies
+\*make
+\*gcc
+\*libsdl2
+
 # compilation
-you need make and libsdl2 to compile
 run ``make all tidy`` to quickly compile the program
 
 the ``all`` recipe will build all neccsisary files and the binary file
