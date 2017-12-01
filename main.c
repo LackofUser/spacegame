@@ -15,7 +15,7 @@ int main(void)
   SDL_Event event;
 
   //Setting up a varible to control when the game runs
-  bool running = true; //Duh!
+  bool running = true; //Duh! Can't run the game without this being true!
 
   //Main game loop which contains, well, everything!
   while(running)
