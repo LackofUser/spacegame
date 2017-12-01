@@ -4,22 +4,13 @@
 #include "SDL2/SDL_video.h"
 #include "base.h"
 
-int rps = 30;
-int pps = 100;
-int p = 0;
 int main(void)
 {
-  //Starting up good 'ol SDL2 with video
-  SDL_Init(SDL_INIT_VIDEO);
+  int rps = 30;
+  int pps = 100;
+  int p = 0;
 
-  //Gota have a window for a game right? (Don't worry: win does not stand for winblows)
-  SDL_Window *win = SDL_CreateWindow("spacegame",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED, 640, 400, SDL_WINDOW_RESIZABLE);
-
-  //Creating a renderer to draw stuff like textures
-  SDL_Renderer *ren = SDL_CreateRenderer(win,-1,SDL_RENDERER_ACCELERATED);
-
-  //Making a varible for events like keypresses, mouse movements, etc...
-  SDL_Event event;
+  init();
 
   backgroundColor = createColor(0,0,0,255);
 
@@ -41,13 +32,13 @@ int main(void)
     //Runs all of the pre-rendering code here
     if(p % rps == 0)
     {
-
+      clear();
     }
 
     //Draws all pre-renders
     if(p % rps == 1)
     {
-      
+      SDL_RenderPresent(ren);
     }
 
     //Steps the p variable
