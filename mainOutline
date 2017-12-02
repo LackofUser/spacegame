@@ -1,67 +1,67 @@
 space game:
-  screens/frames:
-    mainMenu:
-      new game
-      load game
-      options:
-        graphics:
-          max fps:
-            60
-          max pps:
-            120
-        controls:
-          System:
-            Every action has two potential key commands bound to it
-          Keys:
-            Movement:
-              forward:
-                W
-              back:
-                S
-              left:
-                A
-              right:
-                D
-              spin counter-clockwise:
-                Q
-              spin clockwise:
-                E
-              Cycle targets:
-                Tab
-        gameplay
-      credits
-    pauseMenu:
-      resume
-      new game
-      load game
-      options
-      quit
-      save & quit
-    mainSpace:
-      derelictShips
-    map:
-      starSystems:
-        #starSystems
-      playermarker
-      nebuli
-      anomalies
-      spaceStations
-      asteroidBelts
-  gameMechanics:
-    player:
-      camera:
-    movement:
-    factions:
-      pirate
-      neutral
-      GA(galactic athority)
-    shipAI:
-    progression:
-    damage:
-    inventory:
-      shipSubsystems:
-        #subSystems
-      items:
-        currency
+	screens/frames:
+		mainMenu:
+			new game
+			load game
+			options:
+				graphics:
+					max fps:
+						60
+					max pps:
+						120
+				controls:
+					System:
+						Every action has two potential key commands bound to it
+					Keys:
+						Movement:
+							forward:
+								W
+							back:
+								S
+							left:
+								A
+							right:
+								D
+							spin counter-clockwise:
+								Q
+							spin clockwise:
+								E
+							Cycle targets:
+								Tab
+			gameplay
+			credits
+		pauseMenu:
+			resume
+			new game
+			load game
+			options
+			quit
+			save & quit
+		mainSpace:
+			derelictShips
+		map:
+			starSystems:
+				#starSystems
+			playermarker
+			nebuli
+			anomalies
+			spaceStations
+			asteroidBelts
+	gameMechanics:
+		player:
+			camera
+		movement
+		factions:
+			pirate
+			neutral
+			DN(Democratic Nation, this is not finalized)
+		shipAI
+		progression
+		damage:
+		inventory:
+			shipSubsystems:
+				#subSystems
+		items:
+			currency
         
-  optimization:
+  	optimization:
