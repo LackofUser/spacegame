@@ -5,7 +5,29 @@ space game:
       load game
       options:
         graphics:
-        controls
+          max fps:
+            60
+          max pps:
+            120
+        controls:
+          System:
+            Every action has two potential key commands bound to it
+          Keys:
+            Movement:
+              forward:
+                W
+              back:
+                S
+              left:
+                A
+              right:
+                D
+              spin counter-clockwise:
+                Q
+              spin clockwise:
+                E
+              Cycle targets:
+                Tab
         gameplay
       credits
     pauseMenu:
