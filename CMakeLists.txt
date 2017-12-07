@@ -9,5 +9,5 @@ find_library(M_LIB m)
 
 include_directories(spacegame ${SDL2_INCLUDE_DIRS} include)
 
-add_executable(spacegame main.c)
+add_executable(spacegame main.c base.c)
 target_link_libraries(spacegame ${SDL2_LIBRARIES} ${M_LIB})
