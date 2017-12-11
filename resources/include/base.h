@@ -24,7 +24,7 @@ typedef struct obj
   vec pos;
   vec vel;
   int mass;
-}
+} obj;
 
 color backgroundColor;
 
