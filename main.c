@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_video.h"
 #include "base.h"
 
 int main(void)
