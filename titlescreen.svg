@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 256.00001 256.00001"
+   height="256mm"
+   width="256mm">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-40.999982)"
+     style="display:inline"
+     id="layer1">
+    <rect
+       y="40.999985"
+       x="0"
+       height="256"
+       width="256"
+       id="rect3721"
+       style="fill:#000000;stroke-width:0.31484562" />
+    <text
+       id="text3730"
+       y="78.67012"
+       x="6.7644014"
+       style="font-style:normal;font-weight:normal;font-size:37.71135712px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.94278395"
+       xml:space="preserve"><tspan
+         style="fill:#ffffff;stroke-width:0.94278395"
+         y="78.67012"
+         x="6.7644014"
+         id="tspan3728">Space Game</tspan></text>
+    <text
+       id="text3734"
+       y="146.09802"
+       x="56.16777"
+       style="font-style:normal;font-weight:normal;font-size:24.78358269px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.61958963"
+       xml:space="preserve"><tspan
+         style="fill:#ffffff;stroke-width:0.61958963"
+         y="146.09802"
+         x="56.16777"
+         id="tspan3732">New Game</tspan></text>
+    <text
+       id="text3738"
+       y="174.74953"
+       x="51.017952"
+       style="font-style:normal;font-weight:normal;font-size:25.40027618px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.6350069"
+       xml:space="preserve"><tspan
+         style="fill:#ffffff;stroke-width:0.6350069"
+         y="174.74953"
+         x="51.017952"
+         id="tspan3736">Load Game</tspan></text>
+    <text
+       id="text3742"
+       y="205.12471"
+       x="74.273788"
+       style="font-style:normal;font-weight:normal;font-size:24.76821136px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.6192053"
+       xml:space="preserve"><tspan
+         style="fill:#ffffff;stroke-width:0.6192053"
+         y="205.12471"
+         x="74.273788"
+         id="tspan3740">Options</tspan></text>
+    <text
+       id="text3766"
+       y="235.13806"
+       x="82.722206"
+       style="font-style:normal;font-weight:normal;font-size:22.44193268px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.56104833"
+       xml:space="preserve"><tspan
+         style="fill:#ffffff;stroke-width:0.56104833"
+         y="235.13806"
+         x="82.722206"
+         id="tspan3764">Credits</tspan></text>
+  </g>
+</svg>
