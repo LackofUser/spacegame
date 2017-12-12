@@ -3,6 +3,10 @@
 #ifndef BASE_H_
 #define BASE_H_
 
+#define TYPE_SHIP 1
+#define TYPE_BODY 2 //body just means celestial body: a planet, star, commet, and maybe even asteroids
+#define OBJ_PLAYER 4
+
 typedef struct color
 {
   Uint8 r;
@@ -20,10 +24,11 @@ typedef struct vec
 
 typedef struct obj
 {
-  char type[10];
   vec pos;
   vec vel;
   int mass;
+  char texture[128];
+  int flags;
 } obj;
 
 color backgroundColor;
@@ -42,5 +47,9 @@ void init();
 void setDrawColor(color in);
 
 void clear();
+
+obj createShip(vec position, char *sprite[128]);
+
+int drawShip(obj ship);
 
 #endif

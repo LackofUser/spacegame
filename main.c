@@ -7,7 +7,7 @@ int main(void)
 {
 	int rps = 60; // renders per second
 	int pps = 120; // processes per second
-	int p = 0;
+	int p = 0; //iterative variable for multitasking stuff
 
 	init();
 
