@@ -56,6 +56,10 @@ int drawShip(obj ship)
   SDL_Rect pos;
   if(buff == NULL)
   {
+    if(BASE_DEBUG)
+    {
+      puts("could not find original texture: loading fallback");
+    }
     buff = IMG_Load("resources/sprites/null.png");
   }
   if(buff == NULL)

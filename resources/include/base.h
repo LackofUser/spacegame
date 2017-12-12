@@ -6,6 +6,7 @@
 #define TYPE_SHIP 1
 #define TYPE_BODY 2 //body just means celestial body: a planet, star, commet, and maybe even asteroids
 #define OBJ_PLAYER 4
+#define BASE_DEBUG 1
 
 typedef struct color
 {

@@ -11,7 +11,9 @@ int main(void)
 
 	init();
 
-	obj playerShip = createShip("resource/sprites/null.png");
+	obj playerShip = createShip("resources/sprites/null.png");
+
+	playerShip.flags = playerShip.flags | OBJ_PLAYER;
 
 	backgroundColor = createColor(0,0,0,255);
 
