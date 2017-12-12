@@ -1,6 +1,7 @@
 #include "base.h"
 #include <string.h>
 #include "SDL2/SDL_image.h"
+#include "SDL2/SDL_render.h"
 
 color createColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
@@ -35,14 +36,10 @@ void clear()
   SDL_RenderClear(ren);
 }
 
-obj createShip(vec position, char *sprite[128])
+obj createShip(char sprite[])
 {
   obj out;
-  if(&position != NULL)
-  {
-    out.pos = position;
-  }
-  strcpy(out.texture,*sprite);
+  strcpy(out.texture,sprite);
   out.flags = TYPE_SHIP;
   return out;
 }
@@ -57,6 +54,10 @@ int drawShip(obj ship)
   SDL_Surface *buff = IMG_Load(ship.texture);
   SDL_Texture *draw = SDL_CreateTextureFromSurface(ren,buff);
   SDL_Rect pos;
+  if(buff == NULL)
+  {
+    buff = IMG_Load("resources/sprites/null.png");
+  }
   if(buff == NULL)
   {
     fprintf(stderr,"Could not load %s: %s\n",ship.texture,SDL_GetError());

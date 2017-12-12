@@ -48,7 +48,7 @@ void setDrawColor(color in);
 
 void clear();
 
-obj createShip(vec position, char *sprite[128]);
+obj createShip(char sprite[]);
 
 int drawShip(obj ship);
 

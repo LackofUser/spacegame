@@ -11,6 +11,8 @@ int main(void)
 
 	init();
 
+	obj playerShip = createShip("resource/sprites/null.png");
+
 	backgroundColor = createColor(0,0,0,255);
 
 	bool running = true;
@@ -28,6 +30,7 @@ int main(void)
 		if(p % rps == 0)
 		{
 			clear();
+			drawShip(playerShip);
 		}
 
 		// draws all pre-renders
@@ -37,6 +40,7 @@ int main(void)
 		}
 
 		// steps the p variable
+		printf("p:%d\r",p);
 		if(p < pps)
 		{
 			p++;
