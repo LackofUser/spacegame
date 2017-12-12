@@ -36,11 +36,11 @@ void clear()
   SDL_RenderClear(ren);
 }
 
-obj createShip(char sprite[])
+obj createShip(char sprite[], int flags)
 {
   obj out;
   strcpy(out.texture,sprite);
-  out.flags = TYPE_SHIP;
+  out.flags = TYPE_SHIP | flags;
   return out;
 }
 

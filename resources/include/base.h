@@ -49,7 +49,7 @@ void setDrawColor(color in);
 
 void clear();
 
-obj createShip(char sprite[]);
+obj createShip(char sprite[], int flags);
 
 int drawShip(obj ship);
 
