@@ -36,11 +36,12 @@ void clear()
   SDL_RenderClear(ren);
 }
 
-obj createShip(char sprite[], int flags)
+obj createShip(char sprite[], int flags,float scale)
 {
   obj out;
   strcpy(out.texture,sprite);
   out.flags = TYPE_SHIP | flags;
+  out.scale = scale;
   return out;
 }
 
@@ -60,7 +61,7 @@ int drawShip(obj ship)
     {
       puts("could not find original texture: loading fallback");
     }
-    buff = IMG_Load("resources/sprites/null.png");
+    buff = IMG_Load("resources/sprites/null-ship.png");
   }
   if(buff == NULL)
   {

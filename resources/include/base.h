@@ -29,6 +29,7 @@ typedef struct obj
   vec vel;
   int mass;
   char texture[128];
+  float scale
   int flags;
 } obj;
 
@@ -49,7 +50,7 @@ void setDrawColor(color in);
 
 void clear();
 
-obj createShip(char sprite[], int flags);
+obj createShip(char sprite[], int flags, float scale);
 
 int drawShip(obj ship);
 
