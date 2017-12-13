@@ -5,7 +5,7 @@
 
 int main(void)
 {
-	int rps = 125; // fps cap
+	int rps = 62.5; // fps cap
 	int pps = 125; // processes per second
 	int p = 0; //iterative variable for multitasking stuff
 	init();
