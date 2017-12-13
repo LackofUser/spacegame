@@ -5,13 +5,12 @@
 
 int main(void)
 {
-	int rps = 60; // renders per second
-	int pps = 120; // processes per second
+	int rps = 125; // fps cap
+	int pps = 125; // processes per second
 	int p = 0; //iterative variable for multitasking stuff
-
 	init();
 
-	obj playerShip = createShip("resources/sprites/null-ship.png", OBJ_PLAYER,10); //Creates the a ship as the player
+	obj playerShip = createShip("resources/sprites/null-ship.png",OBJ_PLAYER,3); //Creates the a ship as the player
 
 	playerShip.pos.ang = 90;
 
@@ -29,21 +28,27 @@ int main(void)
 				running = false;
 			}
 		}
+
+		playerShip.pos.ang += 1;
+		if(playerShip.pos.ang >= 180)
+		{
+			playerShip.pos.ang = -180;
+		}
+
 		// runs all of the pre-rendering code here
-		if(p % rps == 0)
+		if(p % (int)(pps/rps) == 0)
 		{
 			clear();
 			drawShip(playerShip);
 		}
 
 		// draws all pre-renders
-		if(p % rps == 1)
+		if(p % (int)(pps/rps) == 1 || pps <= rps)
 		{
 			SDL_RenderPresent(ren);
 		}
 
 		// steps the p variable
-		printf("p:%d\r",p);
 		if(p < pps)
 		{
 			p++;
@@ -52,6 +57,8 @@ int main(void)
 		{
 			p = 0;
 		}
+		printf("p:%d   \r",p);
+		fflush(stdout);
 
 		// adds a delay that makes the program run at a frequency of variable pps
 		SDL_Delay(1000/pps);

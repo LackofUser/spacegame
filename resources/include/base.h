@@ -3,10 +3,11 @@
 #ifndef BASE_H_
 #define BASE_H_
 
-#define TYPE_SHIP 1
-#define TYPE_BODY 2 //body just means celestial body: a planet, star, commet, and maybe even asteroids
-#define OBJ_PLAYER 4
-#define BASE_DEBUG 1
+#define OBJ_PLAYER 1
+#define TYPE_SHIP 2
+#define TYPE_BODY 4 //body just means celestial body: a planet, star, commet, and maybe even asteroids
+#define TYPE_ENTITY 8 //Things like debris, dust, and thruster effects
+#define BASE_DEBUG 0
 
 typedef struct color
 {
@@ -28,7 +29,7 @@ typedef struct obj
   vec pos;
   vec vel;
   int mass;
-  char texture[128];
+  SDL_Texture *texture;
   float scale;
   int flags;
 } obj;

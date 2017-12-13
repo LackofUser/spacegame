@@ -38,23 +38,7 @@ void clear()
 
 obj createShip(char sprite[], int flags,float scale)
 {
-  obj out;
-  strcpy(out.texture,sprite);
-  out.flags = TYPE_SHIP | flags;
-  out.scale = scale;
-  return out;
-}
-
-int drawShip(obj ship)
-{
-  if(ship.flags & TYPE_SHIP != 1)
-  {
-    fprintf(stderr,"obj is not of type ship\n");
-    return -2;
-  }
-  SDL_Surface *buff = IMG_Load(ship.texture);
-  SDL_Texture *draw = SDL_CreateTextureFromSurface(ren,buff);
-  SDL_Rect pos;
+  SDL_Surface *buff = IMG_Load(sprite);
   if(buff == NULL)
   {
     if(BASE_DEBUG)
@@ -65,24 +49,47 @@ int drawShip(obj ship)
   }
   if(buff == NULL)
   {
-    fprintf(stderr,"Could not load %s: %s\n",ship.texture,SDL_GetError());
-    return -1;
+    fprintf(stderr,"Could not load resources/sprites/null-ship.png: %s\n",SDL_GetError());
   }
+  SDL_Texture *outt = SDL_CreateTextureFromSurface(ren,buff);
+  obj out;
+  out.flags = TYPE_SHIP | flags;
+  out.scale = scale;
+  out.texture = outt;
+  return out;
+}
+
+int drawShip(obj ship)
+{
+  if(ship.flags & TYPE_SHIP)
+  {
+  }
+  else
+  {
+    fprintf(stderr,"obj is not a ship ¯\\_(ツ)_/¯\n");
+    return -2;
+  }
+
+  SDL_Rect pos;
+  int w, h;
+
+  SDL_QueryTexture(ship.texture, NULL, NULL, &w, &h);
+
   if(ship.flags & OBJ_PLAYER)
   {
-    pos.w = buff->w;
-    pos.h = buff->h;
+    pos.w = w*ship.scale;
+    pos.h = h*ship.scale;
     SDL_GetWindowSize(win,&pos.x,&pos.y);
     pos.x = pos.x/2 - pos.w/2;
     pos.y = pos.y/2 - pos.h/2;
   }
   else
   {
-    pos.w = buff->w;
-    pos.h = buff->h;
+    pos.w = w*ship.scale;
+    pos.h = h*ship.scale;
     pos.x = ship.pos.x - pos.w/2;
     pos.y = ship.pos.y - pos.h/2;
   }
-  SDL_RenderCopyEx(ren, draw, NULL, &pos, ship.pos.ang, NULL, 0);
+  SDL_RenderCopyEx(ren, ship.texture, NULL, &pos, ship.pos.ang, NULL, 0);
   return 0;
 }
