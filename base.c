@@ -66,7 +66,7 @@ int drawShip(obj ship)
   }
   else
   {
-    fprintf(stderr,"obj is not a ship ¯\\_(ツ)_/¯\n");
+    fprintf(stderr,"ship is not a ship ¯\\_(ツ)_/¯\n");
     return -2;
   }
 
