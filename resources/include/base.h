@@ -29,7 +29,7 @@ typedef struct obj
   vec vel;
   int mass;
   char texture[128];
-  float scale
+  float scale;
   int flags;
 } obj;
 
