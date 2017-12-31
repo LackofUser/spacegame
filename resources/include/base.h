@@ -9,6 +9,12 @@
 #define TYPE_ENTITY 8 //Things like debris, dust, and thruster effects
 #define BASE_DEBUG 0
 
+typedef struct ctrl
+{
+	SDL_Keycode key;
+	float value;
+} ctrl;
+
 typedef struct color
 {
   Uint8 r;
@@ -28,11 +34,15 @@ typedef struct obj
 {
   vec pos;
   vec vel;
-  int mass;
+  float mass;
   SDL_Texture *texture;
   float scale;
   int flags;
 } obj;
+
+int rps;
+int pps;
+int p;
 
 color backgroundColor;
 
@@ -51,8 +61,16 @@ void setDrawColor(color in);
 
 void clear();
 
-obj createShip(char sprite[], int flags, float scale);
+obj createShip(char sprite[], int flags, float scale, float mass);
 
 int drawShip(obj ship);
+
+void applyForce(obj *subject, vec force);
+
+void tick(obj *subject);
+
+vec vect(float x, float y, float ang);
+
+float fnegf(float a);
 
 #endif

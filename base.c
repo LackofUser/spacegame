@@ -36,7 +36,7 @@ void clear()
   SDL_RenderClear(ren);
 }
 
-obj createShip(char sprite[], int flags,float scale)
+obj createShip(char sprite[], int flags, float scale, float mass)
 {
   SDL_Surface *buff = IMG_Load(sprite);
   if(buff == NULL)
@@ -56,6 +56,7 @@ obj createShip(char sprite[], int flags,float scale)
   out.flags = TYPE_SHIP | flags;
   out.scale = scale;
   out.texture = outt;
+  out.mass = mass;
   return out;
 }
 
@@ -92,4 +93,32 @@ int drawShip(obj ship)
   }
   SDL_RenderCopyEx(ren, ship.texture, NULL, &pos, ship.pos.ang, NULL, 0);
   return 0;
+}
+
+void applyForce(obj *subject, vec force)
+{
+  subject->vel.x += force.x/(subject->mass*pps);
+  subject->vel.y += force.y/(subject->mass*pps);
+  subject->vel.ang += force.ang/(subject->mass*pps);
+}
+
+void tick(obj *subject)
+{
+  subject->pos.x += subject->vel.x/pps;
+  subject->pos.y += subject->vel.y/pps;
+  subject->pos.ang += subject->vel.ang/pps;
+}
+
+vec vect(float x, float y, float ang)
+{
+  vec out;
+  out.x = x;
+  out.y = y;
+  out.ang = ang;
+  return out;
+}
+
+float fnegf(float a)
+{
+  return a > 0 ? 1 : a < 0 ? -1 : 0;
 }
