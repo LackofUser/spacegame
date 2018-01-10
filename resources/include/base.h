@@ -12,7 +12,7 @@
 typedef struct ctrl
 {
 	SDL_Keycode key;
-	float value;
+	double value;
 } ctrl;
 
 typedef struct color
@@ -25,20 +25,29 @@ typedef struct color
 
 typedef struct vec
 {
-  float x;
-  float y;
-  float ang;
+  double x;
+  double y;
+  double ang;
 } vec;
 
 typedef struct obj
 {
   vec pos;
   vec vel;
-  float mass;
+  double mass;
   SDL_Texture *texture;
-  float scale;
+  double scale;
   int flags;
 } obj;
+
+typedef struct particle
+{
+	vec pos;
+	SDL_Texture *texture;
+	double scale;
+	obj *parent; //The particle will inherit the parent's velocity, it's a pointer so you don't have to update this child constantly
+	bool local; //This just means that the position of the particle will be relative to the parent (if the parent exists)
+} particle;
 
 int rps;
 int pps;
@@ -61,7 +70,7 @@ void setDrawColor(color in);
 
 void clear();
 
-obj createShip(char sprite[], int flags, float scale, float mass);
+obj createShip(char sprite[], int flags, double scale, double mass);
 
 int drawShip(obj ship);
 
@@ -69,8 +78,18 @@ void applyForce(obj *subject, vec force);
 
 void tick(obj *subject);
 
-vec vect(float x, float y, float ang);
+vec vect(double x, double y, double ang);
 
-float fnegf(float a);
+vec split(double magnitude, double direction);
+
+double fnegf(double a);
+
+int minabs(int a, int b);
+
+int maxabs(int a, int b);
+
+double minabsf(double a, double b);
+
+double maxabsf(double a, double b);
 
 #endif

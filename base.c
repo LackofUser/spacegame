@@ -1,5 +1,6 @@
 #include "base.h"
 #include <string.h>
+#include <math.h>
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_render.h"
 
@@ -118,7 +119,67 @@ vec vect(float x, float y, float ang)
   return out;
 }
 
+vec split(double magnitude, double direction)
+{
+  vec out;
+  out.y = sin(direction)*magnitude;
+  out.x = cos(direction)*magnitude;
+  return out;
+}
+
 float fnegf(float a)
 {
   return a > 0 ? 1 : a < 0 ? -1 : 0;
+}
+
+int minabs(int a, int b)
+{
+  if(abs(a) < abs(b))
+  {
+    return a;
+  }
+  else if(abs(b) < abs(a))
+  {
+    return b;
+  }
+  return a; //this is when the absolute values are the same
+}
+
+int maxabs(int a, int b)
+{
+  if(abs(a) > abs(b))
+  {
+    return a;
+  }
+  else if(abs(b) > abs(a))
+  {
+    return b;
+  }
+  return a; //this is when the absolute values are the same
+}
+
+double minabsf(double a, double b)
+{
+  if(fabsf(a) < fabsf(b))
+  {
+    return a;
+  }
+  else if(fabsf(b) < fabsf(a))
+  {
+    return b;
+  }
+  return a; //this is when the absolute values are the same
+}
+
+double maxabsf(double a, double b)
+{
+  if(fabsf(a) > fabsf(b))
+  {
+    return a;
+  }
+  else if(fabsf(b) > fabsf(a))
+  {
+    return b;
+  }
+  return a; //this is when the absolute values are the same
 }
