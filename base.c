@@ -37,7 +37,7 @@ void clear()
   SDL_RenderClear(ren);
 }
 
-obj createShip(char sprite[], int flags, float scale, float mass)
+obj createShip(char sprite[], int flags, double scale, double mass)
 {
   SDL_Surface *buff = IMG_Load(sprite);
   if(buff == NULL)
@@ -110,7 +110,7 @@ void tick(obj *subject)
   subject->pos.ang += subject->vel.ang/pps;
 }
 
-vec vect(float x, float y, float ang)
+vec vect(double x, double y, double ang)
 {
   vec out;
   out.x = x;
@@ -127,7 +127,7 @@ vec split(double magnitude, double direction)
   return out;
 }
 
-float fnegf(float a)
+double fnegf(double a)
 {
   return a > 0 ? 1 : a < 0 ? -1 : 0;
 }
