@@ -160,11 +160,11 @@ int maxabs(int a, int b)
 
 double minabsf(double a, double b)
 {
-  if(fabsf(a) < fabsf(b))
+  if(fabs(a) < fabs(b))
   {
     return a;
   }
-  else if(fabsf(b) < fabsf(a))
+  else if(fabs(b) < fabs(a))
   {
     return b;
   }
@@ -173,11 +173,11 @@ double minabsf(double a, double b)
 
 double maxabsf(double a, double b)
 {
-  if(fabsf(a) > fabsf(b))
+  if(fabs(a) > fabs(b))
   {
     return a;
   }
-  else if(fabsf(b) > fabsf(a))
+  else if(fabs(b) > fabs(a))
   {
     return b;
   }

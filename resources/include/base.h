@@ -1,4 +1,5 @@
 #include "SDL2/SDL.h"
+#include <stdbool.h>
 
 #ifndef BASE_H_
 #define BASE_H_
