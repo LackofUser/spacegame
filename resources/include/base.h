@@ -3,11 +3,21 @@
 #ifndef BASE_H_
 #define BASE_H_
 
+#define MAX_OBJ 3
+#define MAX_PAR 3
+#define MAX_TEX 2
+
 #define OBJ_PLAYER 1
 #define TYPE_SHIP 2
 #define TYPE_BODY 4 //body just means celestial body: a planet, star, commet, and maybe even asteroids
 #define TYPE_ENTITY 8 //Things like debris, dust, and thruster effects
 #define BASE_DEBUG 0
+
+typedef struct texture
+{
+	SDL_Texture *data;
+	char file[];
+}
 
 typedef struct ctrl
 {
@@ -49,6 +59,9 @@ typedef struct particle
 	bool local; //This just means that the position of the particle will be relative to the parent (if the parent exists)
 } particle;
 
+texture textures[MAX_TEX];
+int texts = 0;
+
 int rps;
 int pps;
 int p;
@@ -71,6 +84,10 @@ void setDrawColor(color in);
 void clear();
 
 obj createShip(char sprite[], int flags, double scale, double mass);
+
+int loadTexture(char tex[]);
+
+int textureIndex(char tex[]);
 
 int drawShip(obj ship);
 

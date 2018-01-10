@@ -61,6 +61,42 @@ obj createShip(char sprite[], int flags, double scale, double mass)
   return out;
 }
 
+int loadTexture(char tex[])
+{
+  SDL_Surface *buff = IMG_Load(tex);
+  if(buff == NULL)
+  {
+    if(BASE_DEBUG)
+    {
+      puts("could not find original texture: loading fallback");
+    }
+    buff = IMG_Load("resources/sprites/null-ship.png");
+  }
+  if(buff == NULL)
+  {
+    fprintf(stderr,"Could not load resources/sprites/null-ship.png: %s\n",SDL_GetError());
+  }
+  texture out;
+  out.data = SDL_CreateTextureFromSurface(ren,buff);
+  out.file = tex;
+  textures[texts] = out;
+  texts++;
+}
+
+int textureIndex(char tex[])
+{
+  int i = 0;
+  while(i < MAX_TEX)
+  {
+    if(strcmp(textures[i].file,tex) == 0)
+    {
+      return i;
+    }
+    i++;
+  }
+  return -1;
+}
+
 int drawShip(obj ship)
 {
   if(ship.flags & TYPE_SHIP)
