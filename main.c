@@ -104,7 +104,9 @@ int main(void)
 		if(ctrls.up.value || ctrls.down.value || ctrls.right.value || ctrls.left.value)
 		{
 			tang = (ctrls.down.value*180 + ctrls.right.value*90 - ctrls.left.value*90)/(ctrls.up.value + ctrls.down.value + ctrls.right.value + ctrls.left.value);
+			tang = minabsf(tang-playerShip.pos.ang,tang-playerShip.pos.ang - 360) + playerShip.pos.ang;
 		}
+
 
 		/*if(fabsf(playerShip.vel.ang) <= 1)
 		{
@@ -113,7 +115,7 @@ int main(void)
 		tvel = -fnegf(tang - playerShip.pos.ang)*(tang - playerShip.pos.ang + fabsf(tang+sang-playerShip.pos.ang*2));
 		applyForce(&playerShip,vect(0,0,((tang+sang-playerShip.pos.ang*2) + (tvel - playerShip.vel.ang))*playerShip.mass));
 */
-		applyForce(&playerShip,vect(0,0,((tang-playerShip.pos.ang)*100 -fabsf(playerShip.vel.ang)*playerShip.vel.ang)*playerShip.mass));
+		applyForce(&playerShip,vect(0,0,((tang-playerShip.pos.ang)*100 -fabs(playerShip.vel.ang)*playerShip.vel.ang)*playerShip.mass));
 
 		tick(&playerShip);
 
