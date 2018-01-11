@@ -43,10 +43,17 @@ space game:
 			starSystems:
 				#starSystems
 			playermarker
-			nebuli
-			anomalies
+			nebulae:
+				reflection nebulae
+				dark nebulae
+				supernova reminent
+			anomalies:
+				black hole
+				wormhole
 			spaceStations
-			asteroidBelts
+			asteroidBelts:
+				Kuiper belt
+				
 	gameMechanics:
 		player:
 			camera
