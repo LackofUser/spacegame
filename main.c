@@ -37,7 +37,7 @@ int main(void)
 	float tvel;
 	init();
 
-	obj playerShip = createShip("resources/sprites/ship-body.png", OBJ_PLAYER, 10, 100); //Creates the a ship as the player
+	playerShip = createShip("resources/sprites/ship-body.png", OBJ_PLAYER, 10, 100); //Creates the a ship as the player
 
 	playerShip.pos.ang = 90;
 	playerShip.vel.ang = 0;
@@ -130,7 +130,6 @@ int main(void)
 		tang = (ctrls.cw.value - ctrls.ccw.value)*100;
 
 
-
 		/*if(fabsf(playerShip.vel.ang) <= 1)
 		{
 			sang = playerShip.pos.ang;
@@ -171,7 +170,8 @@ int main(void)
 		{
 			p = 0;
 		}
-		printf("                speed:%f      \r", sqrt(playerShip.vel.x*playerShip.vel.x + playerShip.vel.y*playerShip.vel.y));
+		printf("                                      dir:%f      \r", direction(playerShip.vel));
+		printf("                mag:%f      \r", magnitude(playerShip.vel));
 		printf("va:%f\r",playerShip.vel.ang);
 		fflush(stdout);
 

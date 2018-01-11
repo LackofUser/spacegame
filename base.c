@@ -39,50 +39,32 @@ void clear()
   SDL_RenderClear(ren);
 }
 
-obj createShip(char sprite[], int flags, double scale, double mass)
-{
-  SDL_Surface *buff = IMG_Load(sprite);
-  if(buff == NULL)
-  {
-    if(BASE_DEBUG)
-    {
-      puts("could not find original texture: loading fallback");
-    }
-    buff = IMG_Load("resources/sprites/null-ship.png");
-  }
-  if(buff == NULL)
-  {
-    fprintf(stderr,"Could not load resources/sprites/null-ship.png: %s\n",SDL_GetError());
-  }
-  SDL_Texture *outt = SDL_CreateTextureFromSurface(ren,buff);
-  obj out;
-  out.flags = TYPE_SHIP | flags;
-  out.scale = scale;
-  out.texture = outt;
-  out.mass = mass;
-  return out;
-}
-
 int loadTexture(char tex[])
 {
   SDL_Surface *buff = IMG_Load(tex);
   if(buff == NULL)
   {
-    if(BASE_DEBUG)
-    {
-      puts("could not find original texture: loading fallback");
-    }
+    if(BASE_DEBUG){puts("could not find original texture: loading fallback");}
     buff = IMG_Load("resources/sprites/null-ship.png");
+    if(BASE_DEBUG) {puts("Done");}
   }
+  if(BASE_DEBUG) {puts("Checking if buffer is valid");}
   if(buff == NULL)
   {
     fprintf(stderr,"Could not load resources/sprites/null-ship.png: %s\n",SDL_GetError());
+    return -1;
   }
-  texture out;
-  out.data = SDL_CreateTextureFromSurface(ren,buff);
-  strcpy(out.file,tex);
-  textures[texts] = out;
+  else if(BASE_DEBUG) {puts("Done");}
+
+  if(BASE_DEBUG) {puts("Adding loaded texture to catalog");}
+  strcpy(textures[texts].file,tex);
+
+  if(BASE_DEBUG) {puts("Loading buffer to output");}
+  textures[texts].data = SDL_CreateTextureFromSurface(ren,buff);;
+
+  if(BASE_DEBUG) {puts("Adding index value");}
   texts++;
+  if(BASE_DEBUG) {puts("Done");}
 }
 
 int textureIndex(char tex[])
@@ -97,6 +79,38 @@ int textureIndex(char tex[])
     i++;
   }
   return -1;
+}
+
+SDL_Texture * grabTexture(char tex[])
+{
+  if(textureIndex(tex) != -1)
+  {
+    return textures[textureIndex(tex)].data;
+  }
+  return NULL;
+}
+
+obj createShip(char sprite[], int flags, double scale, double mass)
+{
+  SDL_Texture *outt;
+  if(grabTexture(sprite) != NULL)
+  {
+    outt = grabTexture(sprite);
+  }
+  else
+  {
+    if(BASE_DEBUG) {puts("Loading texture into catalog");}
+    loadTexture(sprite);
+    if(BASE_DEBUG) {puts("putting loaded texture into output");}
+    outt = grabTexture(sprite);
+    if(BASE_DEBUG) {puts("Done");}
+  }
+  obj out;
+  out.flags = TYPE_SHIP | flags;
+  out.scale = scale;
+  out.texture = outt;
+  out.mass = mass;
+  return out;
 }
 
 int drawShip(obj *ship)
@@ -127,8 +141,8 @@ int drawShip(obj *ship)
   {
     pos.w = w*ship->scale;
     pos.h = h*ship->scale;
-    pos.x = ship->pos.x - pos.w/2;
-    pos.y = ship->pos.y - pos.h/2;
+    pos.x = ship->pos.x - pos.w/2 + playerShip.pos.x;
+    pos.y = ship->pos.y - pos.h/2 + playerShip.pos.y;
   }
   SDL_RenderCopyEx(ren, ship->texture, NULL, &pos, ship->pos.ang, NULL, 0);
   return 0;
@@ -157,12 +171,50 @@ vec vect(double x, double y, double ang)
   return out;
 }
 
+vec setx(vec a, double x)
+{
+  vec out = a;
+  out.x = x;
+  return out;
+}
+
+vec sety(vec a, double y)
+{
+  vec out = a;
+  out.y = y;
+  return out;
+}
+
+vec setang(vec a, double ang)
+{
+  vec out = a;
+  out.ang = ang;
+  return out;
+}
+
 vec split(double magnitude, double direction)
 {
   vec out;
   out.y = sin(direction*M_PI/180 - M_PI/2)*magnitude;
   out.x = cos(direction*M_PI/180 - M_PI/2)*magnitude;
   return out;
+}
+
+double magnitude(vec a)
+{
+  return sqrt(a.x*a.x + a.y*a.y);
+}
+
+double direction(vec a)
+{
+  if(a.y >= 0)
+  {
+    return atan(a.x/a.y)*180/M_PI;
+  }
+  else
+  {
+    return -atan(a.y/a.x)*180/M_PI + 90*neg(a.x);
+  }
 }
 
 double fnegf(double a)
@@ -220,4 +272,27 @@ double maxabsf(double a, double b)
     return b;
   }
   return a; //this is when the absolute values are the same
+}
+
+double neg(double a)
+{
+  if(a > 0)
+  {
+    return 1;
+  }
+  if(a < 0)
+  {
+    return -1;
+  }
+  return 0;
+}
+
+double mod(double x, double a)
+{
+  return x/a - floor(x/a);
+}
+
+double con(double x, double min, double max)
+{
+  mod(x - max, max - min) + min;
 }

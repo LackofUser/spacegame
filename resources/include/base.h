@@ -12,12 +12,12 @@
 #define TYPE_SHIP 2
 #define TYPE_BODY 4 //body just means celestial body: a planet, star, commet, and maybe even asteroids
 #define TYPE_ENTITY 8 //Things like debris, dust, and thruster effects
-#define BASE_DEBUG 0
+#define BASE_DEBUG 1
 
 typedef struct texture
 {
 	SDL_Texture *data;
-	char file[];
+	char file[256];
 } texture;
 
 typedef struct ctrl
@@ -78,17 +78,21 @@ SDL_Renderer *ren;
 //Making a varible for events like keypresses, mouse movements, etc...
 SDL_Event event;
 
+obj playerShip;
+
 void init();
 
 void setDrawColor(color in);
 
 void clear();
 
-obj createShip(char sprite[], int flags, double scale, double mass);
-
 int loadTexture(char tex[]);
 
 int textureIndex(char tex[]);
+
+SDL_Texture * grabTexture(char tex[]);
+
+obj createShip(char sprite[], int flags, double scale, double mass);
 
 int drawShip(obj *ship);
 
@@ -98,7 +102,17 @@ void tick(obj *subject);
 
 vec vect(double x, double y, double ang);
 
+vec setx(vec a, double x);
+
+vec sety(vec a, double y);
+
+vec setang(vec a, double ang);
+
 vec split(double magnitude, double direction);
+
+double magnitude(vec a);
+
+double direction(vec a);
 
 double fnegf(double a);
 
@@ -109,5 +123,11 @@ int maxabs(int a, int b);
 double minabsf(double a, double b);
 
 double maxabsf(double a, double b);
+
+double neg(double a);
+
+double mod(double x, double a);
+
+double con(double x, double min, double max);
 
 #endif
