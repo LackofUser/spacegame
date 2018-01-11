@@ -4,6 +4,8 @@
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_render.h"
 
+texts = 0;
+
 color createColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
   color out;
@@ -78,7 +80,7 @@ int loadTexture(char tex[])
   }
   texture out;
   out.data = SDL_CreateTextureFromSurface(ren,buff);
-  out.file = tex;
+  strcpy(out.file,tex);
   textures[texts] = out;
   texts++;
 }
@@ -97,9 +99,9 @@ int textureIndex(char tex[])
   return -1;
 }
 
-int drawShip(obj ship)
+int drawShip(obj *ship)
 {
-  if(ship.flags & TYPE_SHIP)
+  if(ship->flags & TYPE_SHIP)
   {
   }
   else
@@ -111,24 +113,24 @@ int drawShip(obj ship)
   SDL_Rect pos;
   int w, h;
 
-  SDL_QueryTexture(ship.texture, NULL, NULL, &w, &h);
+  SDL_QueryTexture(ship->texture, NULL, NULL, &w, &h);
 
-  if(ship.flags & OBJ_PLAYER)
+  if(ship->flags & OBJ_PLAYER)
   {
-    pos.w = w*ship.scale;
-    pos.h = h*ship.scale;
+    pos.w = w*ship->scale;
+    pos.h = h*ship->scale;
     SDL_GetWindowSize(win,&pos.x,&pos.y);
-    pos.x = pos.x/2 - pos.w/2;
-    pos.y = pos.y/2 - pos.h/2;
+    pos.x = pos.x/2 - pos.w/2 - ship->vel.x;
+    pos.y = pos.y/2 - pos.h/2 - ship->vel.y;
   }
   else
   {
-    pos.w = w*ship.scale;
-    pos.h = h*ship.scale;
-    pos.x = ship.pos.x - pos.w/2;
-    pos.y = ship.pos.y - pos.h/2;
+    pos.w = w*ship->scale;
+    pos.h = h*ship->scale;
+    pos.x = ship->pos.x - pos.w/2;
+    pos.y = ship->pos.y - pos.h/2;
   }
-  SDL_RenderCopyEx(ren, ship.texture, NULL, &pos, ship.pos.ang, NULL, 0);
+  SDL_RenderCopyEx(ren, ship->texture, NULL, &pos, ship->pos.ang, NULL, 0);
   return 0;
 }
 
@@ -158,8 +160,8 @@ vec vect(double x, double y, double ang)
 vec split(double magnitude, double direction)
 {
   vec out;
-  out.y = sin(direction)*magnitude;
-  out.x = cos(direction)*magnitude;
+  out.y = sin(direction*M_PI/180 - M_PI/2)*magnitude;
+  out.x = cos(direction*M_PI/180 - M_PI/2)*magnitude;
   return out;
 }
 

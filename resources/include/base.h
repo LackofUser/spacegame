@@ -18,7 +18,7 @@ typedef struct texture
 {
 	SDL_Texture *data;
 	char file[];
-}
+} texture;
 
 typedef struct ctrl
 {
@@ -61,7 +61,7 @@ typedef struct particle
 } particle;
 
 texture textures[MAX_TEX];
-int texts = 0;
+extern int texts;
 
 int rps;
 int pps;
@@ -90,7 +90,7 @@ int loadTexture(char tex[]);
 
 int textureIndex(char tex[]);
 
-int drawShip(obj ship);
+int drawShip(obj *ship);
 
 void applyForce(obj *subject, vec force);
 

@@ -9,6 +9,8 @@ struct ctrls
  	ctrl down;
 	ctrl right;
 	ctrl left;
+	ctrl cw; //clockwise
+	ctrl ccw; //counter-clockwise
 } ctrls;
 
 int main(void)
@@ -17,6 +19,8 @@ int main(void)
 	ctrls.down.key = SDLK_s;
 	ctrls.right.key = SDLK_d;
 	ctrls.left.key = SDLK_a;
+	ctrls.cw.key = SDLK_e;
+	ctrls.ccw.key = SDLK_q;
 
 	double scale;
 
@@ -25,7 +29,7 @@ int main(void)
 		int y;
 	} winsize;
 
-	rps = 60; // fps cap (125/2) = 62.5 get over it
+	rps = 60; // fps cap (has to be a factor of pps)
 	pps = 120; // processes per second
 	p = 0; //iterative variable for multitasking stuff
 	float tang = 0; //target angle for the player
@@ -48,7 +52,9 @@ int main(void)
 
 		SDL_GetWindowSize(win, &winsize.x, &winsize.y);
 
-		scale = winsize.x < winsize.y ? winsize.x/(float)30 : winsize.y < winsize.x ? winsize.y/(float)30 : winsize.x/(float)30;
+		float zoom = 0.01;
+
+		scale = winsize.x < winsize.y ? winsize.x*zoom : winsize.y < winsize.x ? winsize.y*zoom : winsize.x*zoom;
 
 		playerShip.scale = scale;
 
@@ -77,6 +83,14 @@ int main(void)
 				{
 					ctrls.left.value = 1;
 				}
+				if(event.key.keysym.sym == ctrls.cw.key)
+				{
+					ctrls.cw.value = 1;
+				}
+				if(event.key.keysym.sym == ctrls.ccw.key)
+				{
+					ctrls.ccw.value = 1;
+				}
 			}
 
 			if(event.type == SDL_KEYUP)
@@ -97,15 +111,24 @@ int main(void)
 				{
 					ctrls.left.value = 0;
 				}
+				if(event.key.keysym.sym == ctrls.cw.key)
+				{
+					ctrls.cw.value = 0;
+				}
+				if(event.key.keysym.sym == ctrls.ccw.key)
+				{
+					ctrls.ccw.value = 0;
+				}
 			}
 
 		}
 
 		if(ctrls.up.value || ctrls.down.value || ctrls.right.value || ctrls.left.value)
 		{
-			tang = (ctrls.down.value*180 + ctrls.right.value*90 - ctrls.left.value*90)/(ctrls.up.value + ctrls.down.value + ctrls.right.value + ctrls.left.value);
-			tang = minabsf(tang-playerShip.pos.ang,tang-playerShip.pos.ang - 360) + playerShip.pos.ang;
+			applyForce(&playerShip, split(ctrls.up.value*10000, playerShip.pos.ang));
 		}
+		tang = (ctrls.cw.value - ctrls.ccw.value)*100;
+
 
 
 		/*if(fabsf(playerShip.vel.ang) <= 1)
@@ -115,7 +138,14 @@ int main(void)
 		tvel = -fnegf(tang - playerShip.pos.ang)*(tang - playerShip.pos.ang + fabsf(tang+sang-playerShip.pos.ang*2));
 		applyForce(&playerShip,vect(0,0,((tang+sang-playerShip.pos.ang*2) + (tvel - playerShip.vel.ang))*playerShip.mass));
 */
-		applyForce(&playerShip,vect(0,0,((tang-playerShip.pos.ang)*100 -fabs(playerShip.vel.ang)*playerShip.vel.ang)*playerShip.mass));
+		if(tang != 0)
+		{
+			applyForce(&playerShip,vect(0,0,( tang-playerShip.vel.ang)*3*playerShip.mass));
+		}
+		else
+		{
+			applyForce(&playerShip,vect(0,0,( tang-playerShip.vel.ang)*5*playerShip.mass));
+		}
 
 		tick(&playerShip);
 
@@ -123,7 +153,7 @@ int main(void)
 		if(p % (int)(pps/rps) == 0)
 		{
 			clear();
-			drawShip(playerShip);
+			drawShip(&playerShip);
 		}
 
 		// draws all pre-renders
@@ -141,7 +171,7 @@ int main(void)
 		{
 			p = 0;
 		}
-		printf("                tva:%f      \r", tvel);
+		printf("                speed:%f      \r", sqrt(playerShip.vel.x*playerShip.vel.x + playerShip.vel.y*playerShip.vel.y));
 		printf("va:%f\r",playerShip.vel.ang);
 		fflush(stdout);
 
